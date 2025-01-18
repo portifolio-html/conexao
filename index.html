@@ -3,18 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro de Produtos</title>
+    <title>Cadastro de Cliente</title>
     <link rel="stylesheet" href="static/style_320_portrait.css" media="(min-width: 320px) and (orientation: portrait)">
 </head>
 <body>
     <div class="cont_one">
-        <h1>PRODUTOS</h1>
-        <form action="/cad_pro" method="post">
+        <h1>CLIENTES</h1>
+        <form action="/cad_cli" method="post">
             <div class="cont_sec">
-                <input type="text" name="codigo" id="idcodigo" placeholder="Código">
-                <input type="text" name="descricao" id="iddescricao" placeholder="Descrição">
-                <input type="text" name="preco" id="idpreco" placeholder="Preço">
-                <input type="text" name="quantidade" id="idquantidade" placeholder="QTDE.">
+                <input type="text" name="cod_cli" id="idcod_cli" placeholder="ID.">
+                <input type="text" name="nome" id="idnome" placeholder="Nome">
+                <input type="text" name="sobrenome" id="idsobrenome" placeholder="Sobrenome">
+                <input type="text" name="endereco" id="idendereco" placeholder="Endereço">
+                <input type="text" name="telefone" id="idtelefone" placeholder="Telefone">
             </div>
             <div class="cont_ter">
                 <input type="submit" value="Cadastrar">
