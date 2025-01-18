@@ -23,7 +23,7 @@ body {
 }
 
 h1 {
-    font-size: 2.5rem;
+    font-size: 3rem;
     font-weight: 900;
     color: rgb(250, 29, 29);
 }
@@ -58,7 +58,7 @@ form {
 
 input {
     width: 92%;
-    height: 2rem;
+    height: 2.5rem;
     font-size: 1.2rem;
     text-align: center;
     border: 0;
