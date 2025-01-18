@@ -5,6 +5,7 @@
     padding: 0;
     font-family: Arial, Helvetica, sans-serif;
     box-sizing: border-box;
+    text-decoration: none;
 }
 
 body {
@@ -51,6 +52,10 @@ form {
     padding-bottom: 1em;
 }
 
+.cont_ter {
+    gap: .4em;
+}
+
 input {
     width: 92%;
     height: 2rem;
@@ -62,4 +67,16 @@ input {
 
 input[type=submit] {
     background-color: rgb(250, 198, 29);
+}
+
+a {
+    width: 92%;
+    padding: 5px 0;
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+a:hover {
+    background-color: brown;
+    color: aliceblue;
 }
