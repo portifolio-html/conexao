@@ -8,5 +8,36 @@
 }
 
 body {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.cont_one {
     background-color: aqua;
+}
+
+h1 {
+    font-size: 1rem;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    background-color: blueviolet;
+    align-items: center;
+}
+
+.cont_sec {
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 1em;
+    gap: .4em;
+}
+
+input:not([type=submit]) {
+    width: 92%;
+    height: 1.5rem;
 }
