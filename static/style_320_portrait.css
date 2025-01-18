@@ -12,6 +12,7 @@ body {
     align-items: center;
     width: 100vw;
     height: 100vh;
+    background-color: rgb(226, 224, 224);
 }
 
 .cont_one {
@@ -21,8 +22,9 @@ body {
 }
 
 h1 {
-    font-size: 1.5rem;
+    font-size: 2rem;
     font-weight: 900;
+    color: rgb(250, 29, 29);
 }
 
 form {
@@ -31,7 +33,7 @@ form {
     align-items: center;
 }
 
-.cont_sec {
+.cont_sec, .cont_ter {
     width: 100vw;
     display: flex;
     align-items: center;
@@ -40,8 +42,14 @@ form {
     gap: .4em;
 }
 
-input:not([type=submit]) {
+input {
     width: 92%;
     height: 2rem;
     font-size: 1.2rem;
+    text-align: center;
+    border: 0;
+}
+
+input[type=submit] {
+    background-color: rgb(250, 198, 29);
 }
