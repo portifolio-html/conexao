@@ -22,9 +22,13 @@ body {
 }
 
 h1 {
-    font-size: 2rem;
+    font-size: 2.5rem;
     font-weight: 900;
     color: rgb(250, 29, 29);
+}
+
+h3 {
+    font-family: cursive;
 }
 
 form {
@@ -39,7 +43,12 @@ form {
     align-items: center;
     flex-direction: column;
     padding: 1em;
-    gap: .7em;
+    gap: 1em;
+}
+
+.cont_sec {
+    margin-top: 1em;
+    padding-bottom: 1em;
 }
 
 input {
