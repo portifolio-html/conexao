@@ -57,6 +57,7 @@ input {
     font-size: 1.2rem;
     text-align: center;
     border: 0;
+    max-width: 400px;
 }
 
 input[type=submit] {
