@@ -1,8 +1,41 @@
 from flask import Flask, request, render_template, flash
-
+from mysql import connector
+from mysql.connector import Error
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '123456'
+
+
+class Cadastrar_dados:
+
+    def __init__(self, comando):
+        self.host = "localhost"
+        self.database = "supermercado"
+        self.user = "root"
+        self.password = "382536"
+
+        self.comando = comando
+
+    def conectar_basedados(self):
+
+        conexao = connector.connect(
+            host = self.host,
+            database = self.database,
+            user = self.user,
+            password = self.password
+        )
+
+        with conexao.cursor() as cursor:
+            
+            cursor.execute(self.comando)
+            conexao.commit()
+
+            print('cadastrado com sucesso!')
+
+            conexao.close()
+
+
+
 
 @app.route('/')
 def home():
@@ -21,9 +54,10 @@ def cad_vendas():
         quantidade = request.form.get('quantidade')
         total = request.form.get('total')
 
-        print(codigo, nome, cod_produto, produto, valor, quantidade, total)
+        dados = (codigo, nome, cod_produto, quantidade)
 
-        flash('Login realizado com sucesso!', 'success')
+        Cadastrar_dados("cad_vendas", dados).conectar_basedados()
+
         return render_template('index.html')
     
     return render_template('cad_vendas.html')
@@ -38,9 +72,12 @@ def cad_clientes():
         endereco = request.form.get('endereco')
         telefone = request.form.get('telefone')
 
-        print(id, nome, sobrenome, endereco, telefone)
+        query = f"insert into cad_clientes (nome, sobrenome, endereço, telefone) values ({nome}, {sobrenome}, {endereco}, {telefone})"
+
+        Cadastrar_dados(query).conectar_basedados()
 
         return render_template('index.html')
+    
     return render_template('cad_clientes.html')
 
 @app.route('/cad_produtos', methods=['GET', 'POST'])
@@ -59,4 +96,4 @@ def cad_produtos():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0', port=5000)
