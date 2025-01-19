@@ -8,13 +8,14 @@ app.config['SECRET_KEY'] = '123456'
 
 class Cadastrar_dados:
 
-    def __init__(self, comando):
+    def __init__(self, comando, dados):
         self.host = "localhost"
         self.database = "supermercado"
         self.user = "root"
         self.password = "382536"
 
         self.comando = comando
+        self.dados = dados
 
     def conectar_basedados(self):
 
@@ -27,7 +28,7 @@ class Cadastrar_dados:
 
         with conexao.cursor() as cursor:
             
-            cursor.execute(self.comando)
+            cursor.execute(self.comando, self.dados)
             conexao.commit()
 
             print('cadastrado com sucesso!')
@@ -54,17 +55,21 @@ def cad_vendas():
         quantidade = request.form.get('quantidade')
         total = request.form.get('total')
 
-        dados = (codigo, nome, cod_produto, quantidade)
+        query = """
+            insert into cad_vendas (id_cliente, codigo_produto, quantidade) values (%s, %s, %s)
+        """
 
-        Cadastrar_dados("cad_vendas", dados).conectar_basedados()
+        Cadastrar_dados(query, (nome, cod_produto, quantidade)).conectar_basedados()
 
-        return render_template('index.html')
+        return render_template('cad_vendas.html')
     
     return render_template('cad_vendas.html')
 
 @app.route('/cad_clientes', methods=['GET', 'POST'])
 def cad_clientes():
+
     if request.method == 'POST':
+
         # Processamento dos dados
         id = request.form.get('cod_cli')
         nome = request.form.get('nome')
@@ -72,26 +77,34 @@ def cad_clientes():
         endereco = request.form.get('endereco')
         telefone = request.form.get('telefone')
 
-        query = f"insert into cad_clientes (nome, sobrenome, endereço, telefone) values ({nome}, {sobrenome}, {endereco}, {telefone})"
+        query = """
+        insert into cad_clientes (nome, sobrenome, endereço, telefone) values (%s, %s, %s, %s)
+        """
 
-        Cadastrar_dados(query).conectar_basedados()
+        Cadastrar_dados(query, (nome, sobrenome, endereco, telefone)).conectar_basedados()
 
-        return render_template('index.html')
+        return render_template('cad_clientes.html', mensagem="Cliente cadastrado com sucesso!", tipo="sucesso")
     
     return render_template('cad_clientes.html')
 
 @app.route('/cad_produtos', methods=['GET', 'POST'])
 def cad_produtos():
+
     if request.method == 'POST':
+
         # Processamento dos dados
         codigo = request.form.get('codigo')
         descricao = request.form.get('descricao')
         preco = request.form.get('preco')
         quantidade = request.form.get('quantidade')
 
-        print(codigo, descricao, preco, quantidade)
+        query = """
+            insert into cad_produtos (produto, valor, quantidade) values (%s, %s, %s)
+        """
+        Cadastrar_dados(query, (descricao, preco, quantidade)).conectar_basedados()
 
-        return render_template('index.html')
+        return render_template('cad_produtos.html')
+    
     return render_template('cad_produtos.html')
 
 
