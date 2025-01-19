@@ -5,11 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro de Produtos</title>
     <link rel="stylesheet" href="../static/style_320_portrait.css" media="(min-width: 320px) and (orientation: portrait)">
+    <script>
+
+        function setvalor(){
+
+        const dado = document.getElementById('idcodigo')
+        dado.value = "{{codigo}}"
+
+        }
+
+        window.onload = function() {
+            setvalor();
+        }
+    </script>
 </head>
 <body>
     <div class="cont_one">
         <h1>PRODUTOS</h1>
-        <form action="/cad_produtos" method="post">
+        <form action="/cad_produtos" method="post" oninput="setvalor()">
             <div class="cont_sec">
                 <input type="text" name="codigo" id="idcodigo" placeholder="Código">
                 <input type="text" name="descricao" id="iddescricao" placeholder="Descrição">

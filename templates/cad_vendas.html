@@ -5,19 +5,87 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro de Vendas</title>
     <link rel="stylesheet" href="../static/style_320_portrait.css" media="(min-width: 320px) and (orientation: portrait)">
+    <script>
+
+        function setvalor(){
+
+        const dado = document.getElementById('idcodigo')
+        dado.value = "{{codigo}}"
+
+        }
+
+        window.onload = function() {
+            setvalor();
+        }
+
+        function buscarCliente() {
+            const codCliente = document.getElementById("idcod_cliente").value;
+
+            if (codCliente) {
+                fetch(`/buscar_cliente?cod_cliente=${codCliente}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.cliente) {
+                    document.getElementById("idcliente").value = data.cliente;
+                    } else {
+                    document.getElementById("idcliente").value = "";
+                    }
+                })
+                .catch(error => {
+                    console.error("Erro ao buscar o cliente:", error);
+                    document.getElementById("idcliente").value = "";
+                });
+            } else {
+                document.getElementById("idcliente").value = "";
+            }
+        }
+
+        function buscarProduto() {
+            const codProduto = document.getElementById("idcod_produto").value;
+
+            if (codProduto) {
+                fetch(`/buscar_produto?cod_produto=${codProduto}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.produto) {
+                    document.getElementById("idproduto").value = data.produto;
+                    document.getElementById("idpreco").value = data.valor;
+                    } else {
+                    document.getElementById("idproduto").value = "";
+                    }
+                })
+                .catch(error => {
+                    console.error("Erro ao buscar o produto:", error);
+                    document.getElementById("idproduto").value = "";
+                });
+            } else {
+                document.getElementById("idproduto").value = "";
+            }
+        }
+
+        function calc() {
+            const valor = document.getElementById("idpreco").value
+            const quant = document.getElementById("idquantidade").value
+            const total = document.getElementById("idtotal")
+
+            total.value = valor * quant
+
+        }
+    </script>
 </head>
 <body>
     <div class="cont_one">
         <h1>BEM-VINDO</h1>
         <h3>Cadastro de Vendas</h3>
-        <form action="/cad_vendas" method="post">
+        <form action="/cad_vendas" method="post" oninput="setvalor()">
             <div class="cont_sec">
                 <input type="text" name="codigo" id="idcodigo" placeholder="Código da Venda">
+                <input type="text" name="cod_cliente" id="idcod_cliente" placeholder="ID do Cliente" oninput="buscarCliente()">
                 <input type="text" name="cliente" id="idcliente" placeholder="Cliente">
-                <input type="text" name="cod_produto" id="idcod_produto" placeholder="Código do Produto">
+                <input type="text" name="cod_produto" id="idcod_produto" placeholder="Código do Produto" oninput="buscarProduto()">
                 <input type="text" name="produto" id="idproduto" placeholder="Descrição">
                 <input type="text" name="preco" id="idpreco" placeholder="Preço">
-                <input type="text" name="quantidade" id="idquantidade" placeholder="QTDE.">
+                <input type="text" name="quantidade" id="idquantidade" placeholder="QTDE." oninput="calc()">
                 <input type="text" name="total" id="idtotal" placeholder="Total">
             </div>
             <div class="cont_ter">
